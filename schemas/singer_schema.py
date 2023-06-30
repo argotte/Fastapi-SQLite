@@ -12,7 +12,7 @@ class Singer(BaseModel):
                 "Name": "Jackson"
             }
         }
-class GetAllSingers(BaseModel):
+class GetAllSingersSchema(BaseModel):
     id:int
     FirstName:str
     LastName:str

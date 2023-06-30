@@ -1,4 +1,5 @@
 from routes.singer_routes import singer_route
+from routes.album_routes import album_route
 from fastapi import FastAPI,responses
 from config.db import engine, Base
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,6 +30,7 @@ def get_application() -> FastAPI:
     )
     
     app.include_router(singer_route,prefix="/music-store/api/v1")
+    app.include_router(album_route,prefix="/music-store/api/v1")
     return app
 
     

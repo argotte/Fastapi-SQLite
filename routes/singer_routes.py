@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body, Depends, HTTPException,status
 from config.db import Base, Session,engine,conn, get_db
 from models.singer_model import SingerModel
-from schemas.singer_schema import Singer as SingerSchema,GetAllSingers
+from schemas.singer_schema import Singer as SingerSchema,GetAllSingersSchema
 from sqlalchemy.orm.exc import NoResultFound
 from repositories.singer_repository import SingerRepository
 from typing import List
@@ -21,8 +21,8 @@ singer_route = APIRouter(
 #    session.close()
 #    return {"message": "Singer created successfully!!"}
 
-@singer_route.get("/singers/", response_model=List[GetAllSingers], status_code=status.HTTP_200_OK)
-def get_artist_list(db: Session = Depends(get_db),artist_repo: SingerRepository = Depends(SingerRepository)) -> List[GetAllSingers]:
+@singer_route.get("/singers/", response_model=List[GetAllSingersSchema], status_code=status.HTTP_200_OK)
+def get_artist_list(db: Session = Depends(get_db),artist_repo: SingerRepository = Depends(SingerRepository)) -> List[GetAllSingersSchema]:
     
     return artist_repo.get_all_artists(db=db)
 
