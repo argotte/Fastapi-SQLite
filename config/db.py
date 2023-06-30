@@ -11,3 +11,11 @@ engine=create_engine(database_url,echo=True)
 Session=sessionmaker(bind=engine)
 Base=declarative_base()
 conn = engine.connect()
+
+#helper to ger a DB Session
+def get_db():
+    db = Session()
+    try:
+        yield db
+    finally:
+        db.close()
