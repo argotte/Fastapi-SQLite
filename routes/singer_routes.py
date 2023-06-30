@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Body, Depends, HTTPException,status
 from config.db import Base, Session,engine,conn
-from models.singer_model import Singer as SingerModel
+from models.singer_model import SingerModel
 from schemas.singer_schema import Singer as SingerSchema
 from sqlalchemy.orm.exc import NoResultFound
 
 
-singer = APIRouter()
+singer_route = APIRouter()
 #
 
-@singer.post("/singers")
+@singer_route.post("/singers")
 def CreateSinger(singer: SingerSchema):
     new_singer = SingerModel(FirstName=singer.FirstName, LastName=singer.LastName)
     session = Session()
@@ -17,7 +17,7 @@ def CreateSinger(singer: SingerSchema):
     session.close()
     return {"message": "Singer created successfully!!"}
 
-@singer.get("/singers/{id}")
+@singer_route.get("/singers/{id}")
 def GetSingerById(id: int):
     try:
         session = Session()
