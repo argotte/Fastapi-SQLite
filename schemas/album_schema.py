@@ -1,14 +1,26 @@
 from pydantic import BaseModel
 
 class GetAlbumsBySingerIdSchema(BaseModel):
-    ArtistId:int
+    SingerId:int
 
     class Config:
         orm_mode=True
         schema_extra={
             "example":{
-                "Artistid":1,
+                "Singer_Id":1,
                 "Name":"Generic album from Justin Bieber"
             }
         }
 
+class CreateAlbumSchema(BaseModel):
+    Singer_Id:int
+    Name:str
+
+    class Config:
+        orm_mode=True
+        schema_extra={
+            "example":{
+                "Singer_Id":3,
+                "Name":"Random Access Memories"
+            }
+        }
