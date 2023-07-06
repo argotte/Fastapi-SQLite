@@ -17,13 +17,15 @@ class GetAlbumsBySingerIdSchema(BaseModel):
 
 class GetAlbumById(BaseModel):
     id:int
+    Singer_Id:int
     Name:str
     class Config:
         orm_mode=True
         schema_extra={
             "example":{
                 "id":1,
-                "Name":"LOVE"
+                "Singer_Id":1,
+                "Name":"My World 2.0"
             }
         }
 
@@ -35,7 +37,7 @@ class CreateAlbumSchema(BaseModel):
         orm_mode=True
         schema_extra={
             "example":{
-                "Singer_Id":3,
-                "Name":"Random Access Memories"
+                "Singer_Id":1,
+                "Name":"My World 2.0"
             }
         }

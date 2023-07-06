@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Relationship
 from config.db import Base
-from sqlalchemy import Column,Integer,String,Float,ForeignKey
+from sqlalchemy import Column,Integer,String,Float,ForeignKey, UniqueConstraint
 
 
 class AlbumModel(Base):
@@ -11,3 +11,5 @@ class AlbumModel(Base):
     #Relationship('NOMBRE DE LA CLASE',back_populates='NOMBRE DE SU ATRIBUTO')
     Songs = Relationship('SongModel',back_populates='Album')
     Singer = Relationship('SingerModel',back_populates='Albums')
+    # Agregar restricción UNIQUE para Singer_Id y Name
+    __table_args__ = (UniqueConstraint('Singer_Id', 'Name', name='_album_namesinger_uc'),)
