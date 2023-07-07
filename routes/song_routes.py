@@ -24,3 +24,13 @@ def create_song(song:CreateSongSchema,db:Session=Depends(get_db),song_repo:SongR
 @song_route.get("/albums/{id}", response_model=List[GetSongByIdSchema], status_code=status.HTTP_200_OK)
 def GetAlbumByArtistId(id:int,db: Session = Depends(get_db),song_repo: SongRepository = Depends(SongRepository)) -> List[GetSongByIdSchema]:
     return song_repo.get_song_by_album_id(db=db,Album_ID=id)
+
+##Requerimiento 4:
+##music-store/api/v1/singer/{id}/ -> lista total de canciones de un artista
+@song_route.get("/singer/{id}",response_model=List[GetSongByIdSchema],status_code=status.HTTP_200_OK)
+def get_all_songs(id:int, db:Session = Depends(get_db),song_repo:SongRepository = Depends(SongRepository)) -> List[GetSongByIdSchema]:
+    return song_repo.get_song_by_singer_id(db=db,Singer_Id=id)
+
+@song_route.get("/song/{id}",response_model=GetSongByIdSchema,status_code=status.HTTP_200_OK)
+def get_song_by_id(id:int,db:Session=Depends(get_db),song_repo:SongRepository=Depends(SongRepository))->GetSongByIdSchema:
+    return song_repo.get_song_by_id(db=db,song_id=id)

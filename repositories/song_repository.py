@@ -1,5 +1,7 @@
 from typing import List
 from sqlalchemy.orm import Session
+from models.album_model import AlbumModel
+from models.singer_model import SingerModel
 from models.song_model import SongModel
 from schemas.song_schema import CreateSongSchema,GetSongByIdSchema
 
@@ -19,3 +21,6 @@ class SongRepository:
      #Get all tha songs by the id of its album
     def get_song_by_album_id(self,db:Session,Album_ID:int) -> GetSongByIdSchema:
         return db.query(SongModel).filter(SongModel.Album_ID == Album_ID).all()
+    
+    def get_song_by_singer_id(self,db:Session,Singer_Id:int)-> GetSongByIdSchema:
+        return db.query(SongModel).join(AlbumModel,AlbumModel.id == SongModel.Album_ID).join(SingerModel,SingerModel.id==AlbumModel.Singer_Id).filter(SingerModel.id==Singer_Id).all()
