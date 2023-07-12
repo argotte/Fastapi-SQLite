@@ -4,17 +4,22 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-sqlite_file_name ="../database.sqlite"
-base_dir = os.path.dirname(os.path.realpath(__file__))
-database_url =f"sqlite:///{os.path.join(base_dir,sqlite_file_name)}"
-engine=create_engine(database_url,echo=True)
-Session=sessionmaker(bind=engine)
-Base=declarative_base()
-conn = engine.connect()
+# To create a database engine
+SQLALCHEMY_DATABASE_URL = "sqlite:///chinook.db"  
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+# connect_args={"check_same_thread": False} its onyly used for sqlite
 
-#helper to ger a DB Session
+# To create a local database session
+Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# To create an instance of DeclarativeMeta
+Base = declarative_base()
+
+# Helper to get a BD Session
 def get_db():
+    
     db = Session()
+
     try:
         yield db
     finally:

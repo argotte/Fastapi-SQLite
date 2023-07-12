@@ -1,28 +1,20 @@
 from typing import List
 from sqlalchemy.orm import Session
-from models.album_model import AlbumModel
-from models.singer_model import SingerModel
-from models.song_model import SongModel
-from schemas.singer_schema import Singer as SingerSchema, GetAllSingersSchema,CreateSingerSchema,GetSingerByIdSchema
+from models.artist_model import ArtistModel
+from schemas.artist_schema import ArtistSchema
 
 class SingerRepository:
 
 
-    # Get ALL Artists from db
-    def get_all_singers(self, db: Session) -> List[GetAllSingersSchema]:
+    # Req1: Get ALL Artists from db
+    def get_all_singers(self, db: Session) -> List[ArtistSchema]:
 
-        singers_list: List[GetAllSingersSchema] = db.query(SingerModel).all()
+        singers_list: List[ArtistSchema] = db.query(ArtistModel).all()
 
         return singers_list
     
-    def create_singer(self,db:Session,singer:CreateSingerSchema)->int:
-        singer_data=SingerModel(**singer.dict())
-        db.add(singer_data)
-        db.commit()
-        db.refresh(singer_data)
-        return singer_data.id
     
     #get a singer by his id
-    def get_singer_by_id(self, db: Session, singer_id: int) -> GetSingerByIdSchema:
-        return db.query(SingerModel).filter(SingerModel.id == singer_id).first()
+    def get_singer_by_id(self, db: Session, singer_id: int) -> ArtistSchema:
+        return db.query(ArtistModel).filter(ArtistModel.ArtistId == singer_id).first()
 

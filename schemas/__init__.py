@@ -1,1 +1,1 @@
-from .singer_schema import Singer
+from .artist_schema import ArtistSchema
