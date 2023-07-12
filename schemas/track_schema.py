@@ -26,12 +26,12 @@ class TrackSchema(BaseModel):
         schema_extra = {
             "example": {
                 "TrackId": 1,
-                "Name": "Mirrors",
+                "Name": "Beat it",
                 "AlbumId": 1,
                 "MediaTypeId": 1,
                 "GenreId": 1,
-                "Composer": "Justin timberlake",
-                "Milliseconds": 1543,
+                "Composer": "Michael Jackson",
+                "Milliseconds": 1666,
                 "Bytes": 1024,
                 "UnitPrice": 2.99
             }

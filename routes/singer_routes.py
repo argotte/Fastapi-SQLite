@@ -11,7 +11,7 @@ singer_route = APIRouter(
 #
 
 ##Requerimiento 1: LISTA TOTAL DE ARTISTAS
-@singer_route.get("/singers/", response_model=List[ArtistSchema], status_code=status.HTTP_200_OK)
+@singer_route.get("/singers/", response_model=List[ArtistSchema], status_code=status.HTTP_200_OK,summary="GET LIST OF ALL ARTISTS")
 def get_singers_list(db: Session = Depends(get_db),singer_repo: SingerRepository = Depends(SingerRepository)) -> List[ArtistSchema]:
     
     return singer_repo.get_all_singers(db=db)
